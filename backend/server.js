@@ -1,11 +1,20 @@
 const express = require("express");
+const { connectDB } = require("./config/db");
 const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+connectDB();
+
+// handle api request can be setup like this
+const routes = require("./routes/index");
+app.use("/api", routes);
+
 app.use(express.static(path.join(__dirname, "../frontend/build")));
 
+
+// catch all request to index.js
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
 });
@@ -13,33 +22,3 @@ app.get("*", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
-
-const fs = require('fs');
-// password curently stored in plaintext so this must change soon
-const db_password = fs.readFileSync('db_password.txt', 'utf8').trim();
-
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://ethanelliott50:"+db_password+"@cluster0.fh1jr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
-
-async function run() {
-  try {
-    // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
-}
-run().catch(console.dir);
