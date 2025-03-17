@@ -10,7 +10,7 @@
 
 
 /backend/node_modules
-/backend/db_password.txt
+/backend/config/db_password.txt
 
 # testing
 /frontend/coverage/
