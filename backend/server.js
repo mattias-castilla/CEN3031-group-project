@@ -7,8 +7,14 @@ const PORT = process.env.PORT || 5000;
 
 connectDB();
 
+// handle api request can be setup like this
+const routes = require("./routes/index");
+app.use("/api", routes);
+
 app.use(express.static(path.join(__dirname, "../frontend/build")));
 
+
+// catch all request to index.js
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
 });
