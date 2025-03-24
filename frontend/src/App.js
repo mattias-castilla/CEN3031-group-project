@@ -1,4 +1,21 @@
-import logo from './logo.svg';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./login";
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/dashboard" element={<h2>Dashboard (Protected Page)</h2>} />
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;
+
+
+/**import logo from './logo.svg';
 import './App.css';
 
 function App() {
@@ -23,3 +40,4 @@ function App() {
 }
 
 export default App;
+**/
