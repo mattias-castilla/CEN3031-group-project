@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+/**import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./login";
 
 function App() {
@@ -13,9 +13,9 @@ function App() {
 }
 
 export default App;
+**/
 
-
-/**import logo from './logo.svg';
+import logo from './logo.svg';
 import './App.css';
 
 function App() {
@@ -40,4 +40,3 @@ function App() {
 }
 
 export default App;
-**/
