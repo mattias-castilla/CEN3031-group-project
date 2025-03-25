@@ -1,0 +1,10 @@
+{
+    "name": "academinet",
+    "version": "1.0.0",
+    "scripts": {
+        "install": "npm install --prefix frontend && npm install --prefix backend",
+        "build-frontend":  "npm run build --prefix frontend",
+        "start-backend": "npm run start --prefix backend",
+        "start": "npm run install && npm run build-frontend && npm run start-backend"
+    }
+}
