@@ -1,13 +1,17 @@
 const express = require("express");
 const { connectDB } = require("./config/db");
 const path = require("path");
+// the cookie parser must go here. not entirely sure why but it seems to work
+// i am assuming the cookie parser must globally be used by express to work with other parts
+const cookieParser = require("cookie-parser");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
+app.use(cookieParser());
 
-connectDB();
+connectDB(); // mongoDB init
 
 // handle api request can be setup like this
 const routes = require("./routes/index");

@@ -17,10 +17,10 @@ const Login = () => {
             const response = await axios.post('http://localhost:5000/api/auth/login', {
                 email,
                 password,
+            }, {
+                withCredentials: true // this makes sure the cookies will be sent out with the request
             });
 
-            localStorage.setItem('token', response.data.userToken);
-            localStorage.setItem('user', JSON.stringify(response.data.user));
 
             setError('');
             setIsLoggedIn(true);

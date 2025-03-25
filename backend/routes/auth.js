@@ -55,6 +55,14 @@ router.post("/login", async (req, res) => {
 
     const userToken = jwt.sign({email : stored_user.email }, JWT_SECRET, { expiresIn: "1h" });
 
+    // the users jw token can be stored in a cookie
+    // the cookie will be called token
+    res.cookie("token", userToken, {
+        httpOnly: true,
+        secure: false, // since we are not using https the cookies can be sent over http
+        maxAge: 3600000 // 1 hour in milliseconds
+    })
+
     res.json({userToken, user: { email: stored_user.email } });
 });
 
