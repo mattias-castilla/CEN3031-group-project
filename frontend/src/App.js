@@ -1,3 +1,38 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from './components/Login';
+//import Dashboard from './components/Dashboard';  // Example child component
+
+const App = () => {
+    return (
+        <Routes>
+           
+                <Route path="/login" element={<Login />} />
+           
+        </Routes>
+    );
+};
+
+export default App;
+
+/**import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./login";
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/dashboard" element={<h2>Dashboard (Protected Page)</h2>} />
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;
+**/
+
+/** 
 import logo from './logo.svg';
 import './App.css';
 
@@ -23,3 +58,4 @@ function App() {
 }
 
 export default App;
+**/
