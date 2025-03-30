@@ -1,6 +1,5 @@
-const fs = require('fs');
-// password curently stored in plaintext so this must change soon
-const db_password = fs.readFileSync('./config/db_password.txt', 'utf8').trim();
+
+const db_password = process.env.DB_PASSWORD;
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://ethanelliott50:"+db_password+"@cluster0.fh1jr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";

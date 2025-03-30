@@ -8,6 +8,7 @@
 /frontend/.pnp
 /frontend/.pnp.js
 
+/backend/.env
 
 /backend/node_modules
 /backend/config/db_password.txt
