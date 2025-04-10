@@ -57,18 +57,18 @@ async function getPassword(email) {
   return user.password;
 }
 
-// check if the user submitted email is a valid new email
-async function validNewUser(email) {
+// check if the user submitted email is a valid email
+async function validUser(email) {
   const db = client.db(dbName);
   let user_student = await db.collection("students").findOne({email: email});
   let user_researcher = await db.collection("researchers").findOne({email: email});
 
   if(user_student != null || user_researcher != null){
-    return false;
-  }else{
     return true;
+  }else{
+    return false;
   }
   
 }
 
-module.exports = { connectDB, getPassword, validNewUser, insertResearcher, insertStudent, client };
+module.exports = { connectDB, getPassword, validUser, insertResearcher, insertStudent, client };

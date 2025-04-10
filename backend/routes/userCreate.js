@@ -1,7 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 
-const {validNewUser, insertResearcher, insertStudent} = require("../config/db")
+const {validUser, insertResearcher, insertStudent} = require("../config/db")
 
 const router = express.Router();
 
@@ -9,9 +9,9 @@ const router = express.Router();
 router.post("/new/student", async (req, res) => {
     const {first_name, last_name, major, year, email, password} = req.body;
 
-    const valid = await validNewUser(email);
+    const valid = await validUser(email);
 
-    if(!valid){
+    if(valid){
         return res.status(401).json({
             message: "An account already exists with that email!"
         });
@@ -39,9 +39,9 @@ router.post("/new/student", async (req, res) => {
 router.post("/new/researcher", async (req, res) => {
     const {first_name, last_name, affiliation, department, email, password} = req.body;
 
-    const valid = await validNewUser(email);
+    const valid = await validUser(email);
 
-    if(!valid){
+    if(valid){
         return res.status(401).json({
             message: "An account already exists with that email!"
         });
