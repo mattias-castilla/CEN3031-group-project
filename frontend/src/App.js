@@ -6,7 +6,7 @@ import CreateAccount from './components/CreateAccount';
 
 const App = () => {
     return (
-      <Router>
+      
         <Routes>
            
                 <Route path="/login" element={<Login />} />
@@ -14,7 +14,7 @@ const App = () => {
                 
            
         </Routes>
-      </Router>
+      
     );
 };
 
