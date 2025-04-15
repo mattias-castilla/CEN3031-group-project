@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/Login';
+import CreateAccount from './components/CreateAccount';
 //import Dashboard from './components/Dashboard';  // Example child component
 
 const App = () => {
@@ -8,6 +9,7 @@ const App = () => {
         <Routes>
            
                 <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<CreateAccount />} />
                 
            
         </Routes>
