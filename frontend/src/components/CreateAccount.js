@@ -32,7 +32,7 @@ const CreateAccount = () => {
       setError('');
       // Optionally, after a short delay you might navigate to the Login page
       setTimeout(() => {
-        navigate('/login');
+        navigate('/');
       }, 2000);
     } catch (err) {
       setError('There was an issue creating your account. Please try again.');
@@ -49,7 +49,7 @@ const CreateAccount = () => {
       <div className="container">
         <h1>Create Account</h1>
         <div className="account-info">
-          Already have an account? <Link to="/login">Sign In</Link>
+          Already have an account? <Link to="/">Sign In</Link>
         </div>
 
         {error && <div className="error-message">{error}</div>}
