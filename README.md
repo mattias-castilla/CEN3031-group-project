@@ -4,20 +4,20 @@ A research discovery platform for students and researches. Academinet provides a
 ` node v20 or greater  ` 
 ## Setup, Building, and Running
 First make your working directory and clone this repository to your local machine. \
-` mkdir academinet `\
-` git clone https://github.com/mattias-castilla/CEN3031-group-project.git academinet `
+`mkdir academinet`\
+`git clone https://github.com/mattias-castilla/CEN3031-group-project.git academinet `
 
 Navigate to the directory. \
-` cd academinet`
+`cd academinet`
 
 Install the dependencies. \
-` npm run install`
+`npm run install`
 
 Build the frontend. \
-` npm run build-frontend `
+`npm run build-frontend`
 
 Start the backend \
-` npm run start-backend `
+`npm run start-backend`
 
 After this you can navigate to your browser to access academinet hosted locally on your machine. Academinet should be hosted at http://127.0.0.1:5000 .
 
