@@ -22,7 +22,7 @@ const CreateAccount = () => {
 
     try {
       // backend registration endpoint
-      const response = await axios.post('http://localhost:5000/api/auth/register', {
+      const response = await axios.post('http://localhost:5000/api/auth/new/student', {
         fullName,
         email,
         password
