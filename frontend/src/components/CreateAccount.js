@@ -16,7 +16,7 @@ const CreateAccount = () => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      setError('Passwords do not match.');
+      setError('Passwords do not match, please try again.');
       return;
     }
 
@@ -28,14 +28,14 @@ const CreateAccount = () => {
         password
       });
 
-      setSuccess('Account created successfully! Redirecting to login...');
+      setSuccess('Account successfully created! Redirecting to login...');
       setError('');
       // Optionally, after a short delay you might navigate to the Login page
       setTimeout(() => {
         navigate('/');
       }, 2000);
     } catch (err) {
-      setError('There was an issue creating your account. Please try again.');
+      setError('Error with account creation. Please try again.');
       setSuccess('');
     }
   };
