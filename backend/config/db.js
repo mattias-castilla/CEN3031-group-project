@@ -48,6 +48,15 @@ async function insertResearcher(researcher) {
   });
 }
 
+async function insertPost(post) {
+  const db = client.db(dbName);
+  await db.collection("posts").insertOne(post, function (err, res) {
+    if (err) throw err;
+    console.log("1 document inserted");
+    db.close();
+  });
+}
+
 async function getPassword(email) {
   const db = client.db(dbName);
   let user = await db.collection("students").findOne({email: email});
@@ -71,4 +80,4 @@ async function validUser(email) {
   
 }
 
-module.exports = { connectDB, getPassword, validUser, insertResearcher, insertStudent, client };
+module.exports = { connectDB, getPassword, validUser, insertResearcher, insertStudent, insertPost, client };
