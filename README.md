@@ -1,7 +1,7 @@
 # Academinet
 A research discovery platform for students and researches. Academinet provides a platform for students to discover research opportunities posted by researchers at their school. Acadminet also provides researchers with a platform to post their reearch opportunites. By combining the ease of discovery that job boards allow, Academinet aims to simplify the process of researchers and students finding each other. 
 ## Prerequisites 
-` node v20 or greater  ` 
+` Node.js v20 or greater  ` 
 ## Setup, Building, and Running
 First make your working directory and clone this repository to your local machine. \
 `mkdir academinet`\
