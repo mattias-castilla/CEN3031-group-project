@@ -109,7 +109,6 @@ const ResearchOpportunities = () => {
               onClick={() => handleCardClick(post.id)}
             >
               <h3>{post.title}</h3>
-              <p>{post.description}</p>
               <div className="tags">
                 {post.tags.map((t,i) => <span key={i} className="tag">{t}</span>)}
               </div>
@@ -132,7 +131,7 @@ const ResearchOpportunities = () => {
                     onChange={e => setEmail(e.target.value)}
                   />
                   <textarea
-                    placeholder="type your application here"
+                    placeholder="Type your application here..."
                     value={application}
                     onChange={e => setApplication(e.target.value)}
                   />
