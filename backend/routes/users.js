@@ -2,6 +2,7 @@ var express = require('express');
 const authCheck = require('../middleware/authCheck');
 const { insert, getPostings } = require('../config/db');
 const researcherCheck = require('../middleware/researcherCheck');
+const studentCheck = require('../middleware/studentCheck');
 var router = express.Router();
 
 router.get("/", (req, res) => {
@@ -48,7 +49,7 @@ router.post("/new/post", authCheck, researcherCheck, (req, res) => {
 });
 
 
-router.post("/apply", authCheck, researcherCheck, (req, res) => {
+router.post("/apply", authCheck, studentCheck, (req, res) => {
   const {post, email, date, application} = req.body;
 
   try{

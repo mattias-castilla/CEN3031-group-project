@@ -21,4 +21,4 @@ const studentCheck = async (req, res, next) => {
     }
 };
 
-module.exports = researcherCheck;
+module.exports = studentCheck;

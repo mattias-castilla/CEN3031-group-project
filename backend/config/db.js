@@ -39,7 +39,7 @@ async function insert(document, collection) {
     if (await validUser(document.email))
       throw new Error("Duplicate user.");
   }
-  if (collection !== "application") {
+  if (collection !== "applications") {
     throw new Error("Invalid collection.")
   }
 
