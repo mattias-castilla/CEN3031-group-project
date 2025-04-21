@@ -8,6 +8,7 @@ import Home             from './components/Home';
 import ResearchPostings from './components/ResearchPostings';
 import ResearchHome     from './components/ResearchHome';
 import Profile          from './components/Profile';
+import ResearchOpportunities from './components/ResearchOpportunities';
 
 const App = () => (
   <Routes>
@@ -16,8 +17,9 @@ const App = () => (
     <Route path="/user-type"         element={<UserType />} />
     <Route path="/home"              element={<Home />} />
     <Route path="/research-postings" element={<ResearchPostings />} />
-    <Route path="/research-page"     element={<ResearchHome />} />   {/* Use ResearchHome here */}
+    <Route path="/research-page"     element={<ResearchOpportunities />} />   {/* Use ResearchHome here */}
     <Route path="/profile"           element={<Profile />} />
+    <Route path="/ResearchHome"      element={<ResearchHome />} />
   </Routes>
 );
 

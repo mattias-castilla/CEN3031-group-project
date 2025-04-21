@@ -66,7 +66,7 @@ const ResearchOpportunities = () => {
     setSubmitStatus('');
   };
 
-  const handleApply = async (postID) => {
+  const handleApply = async (postId) => {
     setSubmitStatus('Submitting…');
     try {
       await axios.post(
