@@ -40,7 +40,18 @@ const ResearchOpportunities = () => {
           ? new Date(b.date) - new Date(a.date)
           : new Date(a.date) - new Date(b.date)
       );
-if (loading) {
+
+      if (loading) {
+        return (
+          <div className="research-page">
+            <header>
+              <div className="logo">AcademiNet</div>
+            </header>
+            <p>Loading…</p>
+          </div>
+        );
+      }
+
   return (
     <div className="research-page">
       <header>
@@ -71,13 +82,15 @@ if (loading) {
                 <span key={i} className="tag">{tag}</span>
               ))}
             </div>
-            <p className="date">{new Date(post.date).toLocaleDateString()}</p>
+            <p className="date">
+                {new Date(post.date).toLocaleDateString()}
+            </p>
           </div>
         ))}
       </div>
     </div>
   );
 };
-}
+
 
 export default ResearchOpportunities;
