@@ -12,7 +12,7 @@ const UserType = () => {
     if (type === 'Student') {
       navigate('/home');
     } else if (type === 'Researcher') {
-      navigate('/research-page');
+      navigate('/ResearchHome');
     }
   };
 
