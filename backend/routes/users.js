@@ -1,6 +1,6 @@
 var express = require('express');
 const authCheck = require('../middleware/authCheck');
-const { insert } = require('../config/db');
+const { insert, getPostings } = require('../config/db');
 const researcherCheck = require('../middleware/researcherCheck');
 var router = express.Router();
 
@@ -8,9 +8,22 @@ router.get("/", (req, res) => {
   res.json({ message: "test user api" });
 });
 
+router.get("/all/posts", authCheck, async (req, res) => {
+  const posts = await getPostings();
+
+  try {
+    res.json({ posts });
+  }catch(err){
+    res.statusCode(500).json({
+      message: "Server error!"
+    });
+  }
+  
+});
+
 // post the researchers new research posting
 router.post("/new/post", authCheck, researcherCheck, (req, res) => {
-  const { email, title, department, description } = req.body;
+  const { email, title, department, tags, date, description } = req.body;
 
   try {
 
@@ -18,6 +31,8 @@ router.post("/new/post", authCheck, researcherCheck, (req, res) => {
       email,
       title,
       department,
+      tags,
+      date,
       description
     }, "posts")
       .then(() => {
