@@ -5,6 +5,8 @@ import CreateAccount from './components/CreateAccount';
 import UserType from './components/UserType';
 import HamburgerMenu from './components/HamburgerMenu';
 import Home from "./components/Home";
+import ResearchOpportunities from './components/ResearchOpportunities';
+
 
 const App = () => {
     return (
@@ -16,6 +18,7 @@ const App = () => {
                 <Route path="/user-type" element={<UserType />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/hamburger-menu" element={<HamburgerMenu />} />
+                <Route path="/research-page" element={<ResearchOpportunities />} />
            
         </Routes>
       

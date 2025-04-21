@@ -1,0 +1,45 @@
+.research-page {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .filters {
+    margin-bottom: 20px;
+  }
+  
+  .filters input {
+    padding: 10px;
+    margin-right: 10px;
+  }
+  
+  .research-list {
+    padding: 20px;
+  }
+  
+  .research-item {
+    background-color: #f4f4f4;
+    padding: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+  
+  .research-item:hover {
+    background-color: #e4e4e4;
+  }
+  
+  .research-item .tags {
+    margin-top: 10px;
+  }
+  
+  .research-item .tag {
+    background-color: #ddd;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 5px;
+  }
+  
+  .research-item .date {
+    margin-top: 10px;
+    color: #555;
+  }
+  
