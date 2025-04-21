@@ -5,9 +5,12 @@ import './Home.css';
 const Home = () => {
   const [currentPostIndex, setCurrentPostIndex] = useState(0);
   const posts = [
-    { title: 'Post 1', content: 'Lorem ipsum dolor sit amet...', link: '/post/1' },
-    { title: 'Post 2', content: 'Lorem ipsum dolor sit amet...', link: '/post/2' },
-    { title: 'Post 3', content: 'Lorem ipsum dolor sit amet...', link: '/post/3' },
+    { title: 'Data Driven Humanities', content: 'Professor Bozia and students presented new research...', link: '/post/1' },
+    { title: 'Quantum Physics', content: 'Professor Birzu and students pioneered...', link: '/post/2' },
+    { title: 'Marine Biology', content: 'Professor Abil worked alongside students...', link: '/post/3' },
+    { title: 'Discrete Mathematics', content: 'Professor Adams led students...', link: '/post/4' },
+    { title: 'Virtual Reality', content: 'Professor Ragan facilitates students...', link: '/post/5' },
+    { title: 'Special Education', content: 'Dr. Brownell guides student and..', link: '/post/6' },
   ];
 
   const navigate = useNavigate();
