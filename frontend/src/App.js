@@ -4,7 +4,7 @@ import Login from './components/Login';
 import CreateAccount from './components/CreateAccount';
 import UserType from './components/UserType';
 import HamburgerMenu from './components/HamburgerMenu';
-
+import Home from "./components/Home";
 
 const App = () => {
     return (
