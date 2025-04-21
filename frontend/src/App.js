@@ -6,6 +6,8 @@ import UserType from './components/UserType';
 import HamburgerMenu from './components/HamburgerMenu';
 import Home from "./components/Home";
 import ResearchOpportunities from './components/ResearchOpportunities';
+import Profile from './Profile';
+
 
 
 const App = () => {
@@ -19,6 +21,7 @@ const App = () => {
                 <Route path="/home" element={<Home />} />
                 <Route path="/hamburger-menu" element={<HamburgerMenu />} />
                 <Route path="/research-page" element={<ResearchOpportunities />} />
+                <Route path="/profile" element={<Profile />} />
            
         </Routes>
       
