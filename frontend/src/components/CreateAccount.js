@@ -142,8 +142,8 @@ const CreateAccount = () => {
 
           <input type="password"
                  placeholder="Confirm Password"
-                 value={confirmPass}
-                 onChange={e=>setConfirmPass(e.target.value)}
+                 value={confirmPassword}
+                 onChange={e=>setConfirmPassword(e.target.value)}
                  required />
 
           <button type="submit" className="sign-in-btn">
