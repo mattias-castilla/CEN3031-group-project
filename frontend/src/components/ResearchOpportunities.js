@@ -16,7 +16,15 @@ const ResearchOpportunities = () => {
               'http://localhost:5000/api/user/all/posts',
               { withCredentials: true }             
             );
-            setOpportunities(resp.data.posts);      
+            const safePosts = (resp.data.posts || []).map(post => ({
+                ...post,
+                tags: Array.isArray(post.tags)
+                  ? post.tags
+                  : typeof post.tags === 'string'
+                    ? post.tags.split(',').map(t => t.trim()).filter(Boolean)
+                    : []
+              }));
+              setOpportunities(safePosts);     
           } 
           catch (err) {
             console.error(err);
@@ -30,17 +38,6 @@ const ResearchOpportunities = () => {
         fetchPosts();
       }, []);
   
-
-      const filtered = opportunities
-      .filter(post =>
-        selectedTag ? post.tags.includes(selectedTag) : true
-      )
-      .sort((a, b) =>
-        sortedByDate
-          ? new Date(b.date) - new Date(a.date)
-          : new Date(a.date) - new Date(b.date)
-      );
-
       if (loading) {
         return (
           <div className="research-page">
@@ -51,6 +48,18 @@ const ResearchOpportunities = () => {
           </div>
         );
       }
+
+      const filtered = opportunities
+      .filter(post => {
+        const tags = Array.isArray(post.tags) ? post.tags : [];
+        return selectedTag ? tags.includes(selectedTag) : true;
+      })
+      .sort((a, b) => {
+        const da = new Date(a.date || 0);
+        const db = new Date(b.date || 0);
+        return sortedByDate ? db - da : da - db;
+      });
+
 
   return (
     <div className="research-page">
@@ -78,7 +87,7 @@ const ResearchOpportunities = () => {
             <h3>{post.title}</h3>
             <p>{post.description}</p>
             <div className="tags">
-              {post.tags.map((tag, i) => (
+              {(Array.isArray(post.tags) ? post.tags : []).map((tag, i) => (
                 <span key={i} className="tag">{tag}</span>
               ))}
             </div>
