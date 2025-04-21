@@ -7,6 +7,7 @@ const ResearchOpportunities = () => {
     const [selectedTag, setSelectedTag] = useState('');
     const [sortedByDate, setSortedByDate] = useState(false);
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(true);
   
     useEffect(() => {
         const fetchPosts = async () => {
@@ -16,11 +17,16 @@ const ResearchOpportunities = () => {
               { withCredentials: true }             
             );
             setOpportunities(resp.data.posts);      
-          } catch (err) {
+          } 
+          catch (err) {
             console.error(err);
             setError('Could not load research opportunities.');
           }
+          finally {
+            setLoading(false);
+          }
         };
+
         fetchPosts();
       }, []);
   
@@ -34,7 +40,7 @@ const ResearchOpportunities = () => {
           ? new Date(b.date) - new Date(a.date)
           : new Date(a.date) - new Date(b.date)
       );
-
+if (loading) {
   return (
     <div className="research-page">
       <header>
@@ -72,5 +78,6 @@ const ResearchOpportunities = () => {
     </div>
   );
 };
+}
 
 export default ResearchOpportunities;
