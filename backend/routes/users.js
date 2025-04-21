@@ -73,7 +73,7 @@ router.post("/apply", authCheck, studentCheck, (req, res) => {
 });
 
 const { isStudent, isResearcher } = require('../config/db');
-const authCheck = require('../middleware/authCheck');
+//const authCheck = require('../middleware/authCheck');
 
 router.get('/role', authCheck, async (req, res) => {
   const email = req.user.email;
