@@ -27,17 +27,17 @@ router.post("/login", async (req, res) => {
         });
     }
 
-    const type = "";
-    const check_type = await isStudent(email);
-    if(check_type == True){
-        type = "Student"
+        const check_type = await isStudent(email);
+        var type_f = "";
+    if(check_type == true){
+        type_f = "Student";
     }else{
-        type = "Researcher";
+        type_f = "Researcher";
     }
 
     const userToken = jwt.sign(
         {email : email,
-        type : type
+        type : type_f
 
      }, JWT_SECRET, { expiresIn: "1h" });
 
@@ -49,7 +49,7 @@ router.post("/login", async (req, res) => {
         maxAge: 3600000 // 1 hour in milliseconds
     })
 
-    res.json({userToken, user: { email: email } });
+    res.json({userToken, user: { email: email , type : type_f} });
 });
 
 module.exports = router;
