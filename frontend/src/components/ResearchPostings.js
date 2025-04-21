@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import HamburgerMenu from './HamburgerMenu';
 import './ResearchPostings.css';
+import 'backend/config/db.js'
 
 export default function ResearchPostings() {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ export default function ResearchPostings() {
     setLoading(true);
     try {
       await axios.post(
-        'http://localhost:5000/api/posts/new', // adjust to match your API
+        'http://localhost:5000/api/posts/new/post', // adjust to match your API
         { ...form, tags: form.tags.split(',').map((t) => t.trim()) },
         { withCredentials: true }
       );
