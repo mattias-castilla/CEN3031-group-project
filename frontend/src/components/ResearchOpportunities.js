@@ -66,12 +66,17 @@ const ResearchOpportunities = () => {
     setSubmitStatus('');
   };
 
-  const handleApply = async (postId) => {
+  const handleApply = async (postID) => {
     setSubmitStatus('Submitting…');
     try {
       await axios.post(
         'http://localhost:5000/api/user/apply',
-        { postId, email, application },
+        {
+        post:        postId,                       
+        email,                                    
+        date:       new Date().toISOString(),      
+        application,                              
+        },
         { withCredentials: true }
       );
       setSubmitStatus('Application sent!');
