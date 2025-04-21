@@ -125,7 +125,6 @@ async function isStudent(email) {
   const db = client.db(dbName);
 
   let user = await db.collection("students").findOne({email: email});
-  await client.close
 
   if(user != null){
     return true;
