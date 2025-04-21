@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import HamburgerMenu from './HamburgerMenu';
 import './ResearchPostings.css';
-import 'backend/config/db.js'
+import './backend/config/db.js'
 
 export default function ResearchPostings() {
   const navigate = useNavigate();
