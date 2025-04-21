@@ -6,7 +6,7 @@ import UserType from './components/UserType';
 import HamburgerMenu from './components/HamburgerMenu';
 import Home from "./components/Home";
 import ResearchOpportunities from './components/ResearchOpportunities';
-import Profile from './Profile';
+import Profile from './components/Profile';
 
 
 

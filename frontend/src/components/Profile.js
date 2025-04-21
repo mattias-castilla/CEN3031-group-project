@@ -1,8 +1,9 @@
-import React from 'react';
-import { Bookmark, BookmarkCheck } from 'lucide-react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Profile.css';
 
 const Profile = () => {
+  const navigate = useNavigate();
   const user = {
     name: 'Your Name',
     role: 'Student',
@@ -29,14 +30,19 @@ const Profile = () => {
           <div className="profile-pic-placeholder" />
           <div className="major">{user.major}</div>
 
-          <button className="sidebar-btn">
-            <Bookmark className="icon" size={20} />
-            <span>Bookmarks</span>
+          <button
+            className="sidebar-btn" 
+            onClick={() => navigate('/bookmarks')}
+
+            Bookmarks
+          >
           </button>
 
-          <button className="sidebar-btn">
-            <BookmarkCheck className="icon" size={20} />
-            <span>Applied</span>
+          <button 
+           className="sidebar-btn"
+           onClick={() => navigate('/applied')}
+           Applied
+           >
           </button>
         </aside>
 
