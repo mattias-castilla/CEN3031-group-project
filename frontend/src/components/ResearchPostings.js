@@ -4,13 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import HamburgerMenu from './HamburgerMenu';
 import './ResearchPostings.css';
 
-// src/components/ResearchPostings.jsx
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import HamburgerMenu from './HamburgerMenu';
-import './ResearchPostings.css';
-
 export default function ResearchPostings() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
