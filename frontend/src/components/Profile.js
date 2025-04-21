@@ -30,20 +30,9 @@ const Profile = () => {
           <div className="profile-pic-placeholder" />
           <div className="major">{user.major}</div>
 
-          <button
-            className="sidebar-btn" 
-            onClick={() => navigate('/bookmarks')}
+          
 
-            Bookmarks
-          >
-          </button>
-
-          <button 
-           className="sidebar-btn"
-           onClick={() => navigate('/applied')}
-           Applied
-           >
-          </button>
+          
         </aside>
 
         <main className="profile-main">
