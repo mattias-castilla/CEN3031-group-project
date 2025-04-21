@@ -46,4 +46,4 @@ const Home = () => {
   );
 };
 
-export default Newsletter;
+export default Home;

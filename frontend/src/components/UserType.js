@@ -10,9 +10,9 @@ const UserType = () => {
     setUserType(type);
     
     if (type === 'Student') {
-      navigate('/student-dashboard');
+      navigate('/home');
     } else if (type === 'Researcher') {
-      navigate('/researcher-dashboard');
+      navigate('/home');
     }
   };
 

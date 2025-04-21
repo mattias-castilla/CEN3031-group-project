@@ -21,7 +21,6 @@ const CreateAccount = () => {
     }
 
     try {
-      // backend registration endpoint
       const response = await axios.post('http://localhost:5000/api/user/new/student', {
         fullName,
         email,
@@ -30,7 +29,6 @@ const CreateAccount = () => {
 
       setSuccess('Account successfully created! Redirecting to login...');
       setError('');
-      // Optionally, after a short delay you might navigate to the Login page
       setTimeout(() => {
         navigate('/user-type');
       }, 2000);

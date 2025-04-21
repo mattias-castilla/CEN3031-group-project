@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/Login';
 import CreateAccount from './components/CreateAccount';
 import UserType from './components/UserType';
-//import Dashboard from './components/Dashboard';  // Example child component
+import HamburgerMenu from './components/HamburgerMenu';
+
 
 const App = () => {
     return (
@@ -13,6 +14,8 @@ const App = () => {
                 <Route path="/" element={<Login />} />
                 <Route path="/register" element={<CreateAccount />} />
                 <Route path="/user-type" element={<UserType />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/hamburger-menu" element={<HamburgerMenu />} />
            
         </Routes>
       
