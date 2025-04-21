@@ -22,7 +22,7 @@ const CreateAccount = () => {
     }
 
     try {
-      const endpoint = 'http://localhost:5000/api/user/new/${role}'; 
+      const endpoint = `http://localhost:5000/api/user/new/${role}`; 
       await axios.post(endpoint, {
         fullName,
         email,
@@ -32,7 +32,7 @@ const CreateAccount = () => {
       setSuccess('Account successfully created!');
       setError('');
       setTimeout(() => {
-        navigate(role === 'student' ? '/student-home' : '/researcher-home');
+        navigate(role === 'student' ? '/home' : '/ResearchHome');
       }, 1000);
     } catch (err) {
       setError('Error with account creation. Please try again.');
