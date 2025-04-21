@@ -32,7 +32,7 @@ const CreateAccount = () => {
       setError('');
       // Optionally, after a short delay you might navigate to the Login page
       setTimeout(() => {
-        navigate('/');
+        navigate('/user-type');
       }, 2000);
     } catch (err) {
       setError('Error with account creation. Please try again.');

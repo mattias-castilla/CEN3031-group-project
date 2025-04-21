@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/Login';
 import CreateAccount from './components/CreateAccount';
+import UserType from './components/UserType';
 //import Dashboard from './components/Dashboard';  // Example child component
 
 const App = () => {
@@ -11,7 +12,7 @@ const App = () => {
            
                 <Route path="/" element={<Login />} />
                 <Route path="/register" element={<CreateAccount />} />
-                
+                <Route path="/user-type" element={<UserType />} />
            
         </Routes>
       

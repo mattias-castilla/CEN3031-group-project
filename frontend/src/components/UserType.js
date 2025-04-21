@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './UserType.css';
 
-const UserTypeSelection = () => {
+const UserType = () => {
   const [userType, setUserType] = useState('');
   const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ const UserTypeSelection = () => {
   };
 
   return (
-    <div className="user-type-selection">
+    <div className="user-type">
       <header>
         <div className="logo">AcademiNet</div>
       </header>
@@ -46,4 +46,4 @@ const UserTypeSelection = () => {
   );
 };
 
-export default UserTypeSelection;
+export default UserType;
