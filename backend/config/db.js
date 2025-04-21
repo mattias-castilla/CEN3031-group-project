@@ -5,11 +5,10 @@ const uri = "mongodb+srv://ethanelliott50:"+db_password+"@cluster0.fh1jr.mongodb
 
 const dbName = "db"
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
-    strict: true,
+    strict: false,
     deprecationErrors: true,
   }
 });
@@ -40,7 +39,7 @@ async function insert(document, collection) {
     if (await validUser(document.email))
       throw new Error("Duplicate user.");
   }
-  else {
+  if (collection !== "application") {
     throw new Error("Invalid collection.")
   }
 
@@ -49,6 +48,8 @@ async function insert(document, collection) {
     if (err) throw err;
     console.log("1 document inserted");
   });
+
+  await client.close();
 }
 
 async function del(query, collection) {
@@ -56,12 +57,44 @@ async function del(query, collection) {
     throw new Error("Invalid collection.");
   }
 
-  let document = db.collection(collection).find(query);
   const db = client.db(dbName);
-  await db.collection(collection).deleteOne(document, function (err, res) {
+  await db.collection(collection).deleteOne(query, function (err, res) {
     if (err) throw err;
     console.log("1 document deleted");
   });
+
+  await client.close();
+}
+
+async function search(query, path, project, collection) {
+  const db = client.db(dbName);
+  let result = db.collection(collection).aggregate([
+    {
+      $search: {
+        index: "default",
+        text: {
+          query: query,
+          path: path
+        }
+      }
+    },
+    {
+      $project: project
+    }
+  ]);
+  await client.close();
+  return result;
+}
+
+async function update(query, set, collection) {
+  if (!["posts", "students", "researchers"].includes(collection)) {
+    throw new Error("Invalid collection.");
+  }
+
+  const db = client.db(dbName);
+  await db.collection(collection).updateOne(query, set, {upsert: false});
+  await client.close();
+
 }
 
 async function getPassword(email) {
@@ -70,6 +103,7 @@ async function getPassword(email) {
   if (user == null) {
     user = await db.collection("researchers").findOne({email: email});
   }
+  await client.close();
   return user.password;
 }
 
@@ -77,7 +111,7 @@ async function getPostings() {
   const db = client.db(dbName);
 
   return await db.collection("posts").find().toArray();
-  
+
 }
 
 // return if true or false whether email is researcher
@@ -85,6 +119,7 @@ async function isResearcher(email) {
   const db = client.db(dbName);
 
   let user = await db.collection("researchers").findOne({email: email});
+  await client.close();
 
   if(user != null){
     return true;
@@ -98,6 +133,7 @@ async function isStudent(email) {
   const db = client.db(dbName);
 
   let user = await db.collection("students").findOne({email: email});
+  await client.close();
 
   if(user != null){
     return true;
@@ -111,6 +147,7 @@ async function validUser(email) {
   const db = client.db(dbName);
   let user_student = await db.collection("students").findOne({email: email});
   let user_researcher = await db.collection("researchers").findOne({email: email});
+  await client.close();
 
   if(user_student != null || user_researcher != null){
     return true;
@@ -120,4 +157,4 @@ async function validUser(email) {
   
 }
 
-module.exports = { connectDB, getPassword, validUser, getPostings, isStudent, isResearcher, insert, del, client };
+module.exports = { connectDB, getPassword, validUser, getPostings, isStudent, isResearcher, insert, del, update, search, client };
