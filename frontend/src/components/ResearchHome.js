@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; 
 import { Link } from 'react-router-dom';
 import HamburgerMenu from './HamburgerMenu';
 import './ResearchHome.css';
@@ -45,7 +45,12 @@ export default function ActivePostings() {
       </header>
 
       <main className="active-list">
-        <h2>Active Research Positions</h2>
+        <div className="active-list-header">
+          <h2>Active Research Positions</h2>
+          <Link to="/research-postings" className="new-post-btn">
+            + New Posting
+          </Link>
+        </div>
         {dummyPostings.map((post) => (
           <Link
             key={post.id}
@@ -64,7 +69,7 @@ export default function ActivePostings() {
             </p>
             <p className="card-desc">{post.description}</p>
             <div className="card-tags">
-              {post.tags.map((t,i) => (
+              {post.tags.map((t, i) => (
                 <span key={i} className="tag">{t}</span>
               ))}
             </div>
