@@ -6,13 +6,13 @@ const Profile = () => {
   const navigate = useNavigate();
   const user = {
     name: 'Your Name',
-    role: 'Student',
+    //role: 'Student',
     major: 'Computer Science',
     summary: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
       incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident.`,
     experience: [
       {
-        title: 'Internship 1',
+        title: 'About Me',
         description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
           tempor incididunt ut labore et dolore magna aliqua.`,
       }
@@ -45,7 +45,7 @@ const Profile = () => {
           </section>
 
           <section className="section">
-            <h3>Experience:</h3>
+            <h3>About Me:</h3>
             <ul>
               {user.experience.map((exp, i) => (
                 <li key={i}>
