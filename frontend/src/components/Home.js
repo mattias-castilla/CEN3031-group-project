@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Home.css'; 
+import './Home.css';
+import HamburgerMenu from './HamburgerMenu';  // ← added
 
 const Home = () => {
   const [currentPostIndex, setCurrentPostIndex] = useState(0);
@@ -30,6 +31,7 @@ const Home = () => {
   return (
     <div className="home">
       <header>
+        <HamburgerMenu />              {/* ← added */}
         <div className="logo">AcademiNet</div>
       </header>
 
@@ -39,7 +41,7 @@ const Home = () => {
           <h3>{posts[currentPostIndex].title}</h3>
           <p>{posts[currentPostIndex].content}</p>
         </div>
-        
+
         <div className="navigation">
           <button onClick={prevPost} className="prev-btn">←</button>
           <button onClick={nextPost} className="next-btn">→</button>

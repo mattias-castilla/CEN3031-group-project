@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './HamburgerMenu.css';            // ← make sure this path is correct
+import './ResearcherHamburgerMenu.css';            // ← make sure this path is correct
 
 export default function HamburgerMenu() {
   console.log('🍔 HamburgerMenu rendered');
@@ -20,8 +20,8 @@ export default function HamburgerMenu() {
 
       {open && (
         <nav className="hamburger-nav">
-          <Link to="/home"            onClick={() => setOpen(false)}>Home</Link>
-          <Link to="/register"       onClick={() => setOpen(false)}>Sign Up</Link>
+          <Link to="/Researchhome"            onClick={() => setOpen(false)}>Home</Link>
+          <Link to="/profile"       onClick={() => setOpen(false)}>Profile</Link>
         </nav>
       )}
     </div>

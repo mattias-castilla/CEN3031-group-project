@@ -1,6 +1,6 @@
 import React from 'react'; 
 import { Link } from 'react-router-dom';
-import HamburgerMenu from './HamburgerMenu';
+import HamburgerMenu from './ResearcherHamburgerMenu';
 import './ResearchHome.css';
 
 const dummyPostings = [
