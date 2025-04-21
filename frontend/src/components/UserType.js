@@ -41,7 +41,7 @@ const UserType = () => {
         </div>
       </div>
 
-      <footer></footer>
+     
     </div>
   );
 };
