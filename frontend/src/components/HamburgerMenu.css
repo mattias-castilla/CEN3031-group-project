@@ -1,0 +1,38 @@
+.hamburger-menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  
+  .hamburger-icon {
+    font-size: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .menu {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    width: 200px;
+    border-radius: 5px;
+  }
+  
+  .menu ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .menu ul li {
+    margin: 10px 0;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .menu ul li:hover {
+    text-decoration: underline;
+  }
+  
