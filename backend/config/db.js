@@ -48,8 +48,6 @@ async function insert(document, collection) {
     if (err) throw err;
     console.log("1 document inserted");
   });
-
-  await client.close();
 }
 
 async function del(query, collection) {
@@ -62,8 +60,6 @@ async function del(query, collection) {
     if (err) throw err;
     console.log("1 document deleted");
   });
-
-  await client.close();
 }
 
 async function search(query, path, project, collection) {
@@ -82,7 +78,6 @@ async function search(query, path, project, collection) {
       $project: project
     }
   ]);
-  await client.close();
   return result;
 }
 
@@ -93,7 +88,6 @@ async function update(query, set, collection) {
 
   const db = client.db(dbName);
   await db.collection(collection).updateOne(query, set, {upsert: false});
-  await client.close();
 
 }
 
@@ -103,7 +97,6 @@ async function getPassword(email) {
   if (user == null) {
     user = await db.collection("researchers").findOne({email: email});
   }
-  await client.close();
   return user.password;
 }
 
@@ -119,7 +112,6 @@ async function isResearcher(email) {
   const db = client.db(dbName);
 
   let user = await db.collection("researchers").findOne({email: email});
-  await client.close();
 
   if(user != null){
     return true;
@@ -133,7 +125,7 @@ async function isStudent(email) {
   const db = client.db(dbName);
 
   let user = await db.collection("students").findOne({email: email});
-  await client.close();
+  await client.close
 
   if(user != null){
     return true;
@@ -147,7 +139,6 @@ async function validUser(email) {
   const db = client.db(dbName);
   let user_student = await db.collection("students").findOne({email: email});
   let user_researcher = await db.collection("researchers").findOne({email: email});
-  await client.close();
 
   if(user_student != null || user_researcher != null){
     return true;
