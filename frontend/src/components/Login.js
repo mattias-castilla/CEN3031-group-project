@@ -14,20 +14,31 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/login', {
+            await axios.post('http://localhost:5000/api/auth/login', {
                 email,
                 password,
             }, {
                 withCredentials: true
             });
 
-            setError('');
-            setIsLoggedIn(true);
-            setTimeout(() => {
+            //setError('');
+            //setIsLoggedIn(true);
+            //setTimeout(() => {
+                //navigate('/home');
+              //}, 2000);
+            const { data } = await axios.get(
+                'http://localhost:5000/api/user/role',
+                { withCredentials: true }
+            );
+
+            if (data.role === 'student') {
                 navigate('/home');
-              }, 2000);
-        } catch (err) {
-            setError('Invalid credentials. Please try again.');
+              } else {
+                navigate('/ResearchHome');
+              }
+            }
+            catch (err) {
+                setError('Invalid credentials. Please try again.');
         }
     };
 

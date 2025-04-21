@@ -72,4 +72,14 @@ router.post("/apply", authCheck, studentCheck, (req, res) => {
 
 });
 
+const { isStudent, isResearcher } = require('../config/db');
+const authCheck = require('../middleware/authCheck');
+
+router.get('/role', authCheck, async (req, res) => {
+  const email = req.user.email;
+  if (await isStudent(email))    return res.json({ role: 'student' });
+  if (await isResearcher(email)) return res.json({ role: 'researcher' });
+  return res.status(404).json({ message: 'Role not found' });
+});
+
 module.exports = router;
