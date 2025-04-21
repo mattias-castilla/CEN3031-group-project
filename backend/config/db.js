@@ -30,21 +30,37 @@ async function connectDB() {
   }
 }
 
-async function insertStudent(student) {
+// Collections: "students", "researchers", "posts"
+async function insert(document, collection) {
+  if (collection === "posts") {
+    if (!await validUser(document.email))
+      throw new Error("User does not exist.");
+  }
+  else if (collection === "students" || collection === "researchers") {
+    if (await validUser(document.email))
+      throw new Error("Duplicate user.");
+  }
+  else {
+    throw new Error("Invalid collection.")
+  }
+
   const db = client.db(dbName);
-  await db.collection("students").insertOne(student, function (err, res) {
+  await db.collection(collection).insertOne(document, function (err, res) {
     if (err) throw err;
     console.log("1 document inserted");
-    db.close();
   });
 }
 
-async function insertResearcher(researcher) {
+async function del(query, collection) {
+  if (!["posts", "students", "researchers"].includes(collection)) {
+    throw new Error("Invalid collection.");
+  }
+
+  let document = db.collection(collection).find(query);
   const db = client.db(dbName);
-  await db.collection("researchers").insertOne(researcher, function (err, res) {
+  await db.collection(collection).deleteOne(document, function (err, res) {
     if (err) throw err;
-    console.log("1 document inserted");
-    db.close();
+    console.log("1 document deleted");
   });
 }
 
@@ -55,6 +71,19 @@ async function getPassword(email) {
     user = await db.collection("researchers").findOne({email: email});
   }
   return user.password;
+}
+
+// return if true or false whether email is researcher
+async function isResearcher(email) {
+  const db = client.db(dbName);
+
+  let user = await db.collection("researchers").findOne({email: email});
+
+  if(user != null){
+    return true;
+  }else{
+    return false;
+  }
 }
 
 // check if the user submitted email is a valid email
@@ -71,4 +100,4 @@ async function validUser(email) {
   
 }
 
-module.exports = { connectDB, getPassword, validUser, insertResearcher, insertStudent, client };
+module.exports = { connectDB, getPassword, validUser, isResearcher, insert, del, client };

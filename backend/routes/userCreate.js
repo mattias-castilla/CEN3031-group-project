@@ -1,7 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 
-const {validUser, insertResearcher, insertStudent} = require("../config/db")
+const {validUser, insert} = require("../config/db")
 
 const router = express.Router();
 
@@ -19,15 +19,15 @@ router.post("/new/student", async (req, res) => {
 
     const hashed_password = await bcrypt.hash(password, 10);
 
-    insertStudent({
+    await insert({
         first_name,
         last_name,
-        major, 
+        major,
         year,
         role: "student",
         email: email,
         password: hashed_password
-    });
+    }, "students");
 
     return res.status(200).json({
         message: "New student created!"
@@ -49,16 +49,16 @@ router.post("/new/researcher", async (req, res) => {
 
     const hashed_password = await bcrypt.hash(password, 10);
 
-    insertResearcher({
+    await insert({
         first_name,
         last_name,
-        affiliation, 
+        affiliation,
         department,
         role: "researcher",
         email: email,
         password: hashed_password
 
-    });
+    }, "researchers");
 
     return res.status(200).json({
         message: "New researcher created!"

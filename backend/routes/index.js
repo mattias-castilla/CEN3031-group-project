@@ -8,7 +8,7 @@ const protectedRoutes = require("./protected");
 const userCreate = require("./userCreate");
 
 router.use("/auth", authRoutes);
-router.use("/users", usersRoutes);
+router.use("/user", usersRoutes);
 router.use("/protected", protectedRoutes);
 router.use("/user", userCreate);
 
