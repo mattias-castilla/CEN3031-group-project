@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Bruno Ace", sans-serif;
+  }
+  
+  html, body, #root {
+    height: 100%;
+  }
+  
+  .profile-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+  }
+  
+  header,
+  footer {
+    background-color: #0033a0;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  header {
+    margin-bottom: 2rem;
+  }
+  
+  footer {
+    margin-top: auto; 
+  }
+  
+
+  .logo {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ff6600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .profile-content {
+    display: flex;
+    flex-grow: 1;       
+    gap: 2rem;
+    padding: 0 2rem;
+  }
+  
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    min-width: 200px;
+  }
+  
+  .profile-pic-placeholder {
+    width: 150px;
+    height: 150px;
+    background-color: #dee1f2;
+    border-radius: 50%;
+  }
+  
+  .major {
+    font-size: 1.1rem;
+    color: #333;
+  }
+  
+  .sidebar-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    color: #0033a0;
+    cursor: pointer;
+  }
+  
+  .sidebar-btn .icon {
+    stroke: #0033a0;
+  }
+  
+  .sidebar-btn:hover {
+    text-decoration: underline;
+  }
+  
+  .profile-main {
+    flex-grow: 1;
+  }
+  
+  .profile-main h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .profile-main .role {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 1.5rem;
+  }
+  
+  .section {
+    margin-bottom: 2rem;
+  }
+  
+  .section h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .section p {
+    line-height: 1.5;
+    color: #333;
+  }
+  
+  .section ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .section ul li {
+    margin-bottom: 1rem;
+  }
+  
+  .section ul li strong {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+  }
+  
