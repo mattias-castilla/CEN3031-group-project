@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HamburgerMenu from './HamburgerMenu';
-import './ActivePostings.css';
+import './ResearchHome.css';
 
 const dummyPostings = [
   {
