@@ -10,6 +10,15 @@ First make your working directory and clone this repository to your local machin
 Navigate to the directory. \
 `cd academinet`
 
+Set environment variables inside the backend directory. The .env file must have the database password and JWT secret set. The JWT can be set to anyting. \
+` cd backend ` \
+` touch .env `\
+` DB_PASSWORD=token here `\
+` JWT_TOKEN=secret here ` 
+
+Navigate back to the academinet directory. \
+` cd .. `
+
 Install the dependencies. \
 `npm run install`
 
