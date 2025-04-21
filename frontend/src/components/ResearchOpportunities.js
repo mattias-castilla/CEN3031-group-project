@@ -1,32 +1,39 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './ResearchOpportunities.css'; 
 
 const ResearchOpportunities = () => {
-  const [selectedTag, setSelectedTag] = useState('');
-  const [sortedByDate, setSortedByDate] = useState(false);
+    const [opportunities, setOpportunities] = useState([]);      
+    const [selectedTag, setSelectedTag] = useState('');
+    const [sortedByDate, setSortedByDate] = useState(false);
+    const [error, setError] = useState('');
   
+    useEffect(() => {
+        const fetchPosts = async () => {
+          try {
+            const resp = await axios.get(
+              'http://localhost:5000/api/user/all/posts',
+              { withCredentials: true }             
+            );
+            setOpportunities(resp.data.posts);      
+          } catch (err) {
+            console.error(err);
+            setError('Could not load research opportunities.');
+          }
+        };
+        fetchPosts();
+      }, []);
   
-  const opportunities = [
-    { title: 'Research Opportunity 1', tags: ['Tag 1', 'Tag 2'], date: '2025-04-20', description: 'Description for research opportunity 1' },
-    { title: 'Research Opportunity 2', tags: ['Tag 2', 'Tag 3'], date: '2025-04-19', description: 'Description for research opportunity 2' },
-    { title: 'Research Opportunity 3', tags: ['Tag 1', 'Tag 3'], date: '2025-04-18', description: 'Description for research opportunity 3' },
-    
-  ];
 
-  const handleTagFilterChange = (e) => {
-    setSelectedTag(e.target.value);
-  };
-
-  const handleSortByDate = () => {
-    setSortedByDate(!sortedByDate);
-  };
-
-  
-  const filteredOpportunities = opportunities.filter(opportunity =>
-    selectedTag ? opportunity.tags.includes(selectedTag) : true
-  ).sort((a, b) => {
-    return sortedByDate ? new Date(b.date) - new Date(a.date) : new Date(a.date) - new Date(b.date);
-  });
+      const filtered = opportunities
+      .filter(post =>
+        selectedTag ? post.tags.includes(selectedTag) : true
+      )
+      .sort((a, b) =>
+        sortedByDate
+          ? new Date(b.date) - new Date(a.date)
+          : new Date(a.date) - new Date(b.date)
+      );
 
   return (
     <div className="research-page">
@@ -39,22 +46,26 @@ const ResearchOpportunities = () => {
           type="text" 
           placeholder="Filter by tags..." 
           value={selectedTag} 
-          onChange={handleTagFilterChange} 
+          onChange={e => setSelectedTag(e.target.value)}
         />
-        <button onClick={handleSortByDate}>Sort by Date</button>
+        <button onClick={() => setSortedByDate(!sortedByDate)}>
+        Sort by Date
+        </button>
       </div>
 
-      <div className="research-list">
-        {filteredOpportunities.map((opportunity, index) => (
-          <div className="research-item" key={index}>
-            <h3>{opportunity.title}</h3>
-            <p>{opportunity.description}</p>
+      {error && <div className="error-message">{error}</div>}
+
+       <div className="research-list">
+        {filtered.map((post, idx) => (
+          <div className="research-item" key={idx}>
+            <h3>{post.title}</h3>
+            <p>{post.description}</p>
             <div className="tags">
-              {opportunity.tags.map((tag, i) => (
+              {post.tags.map((tag, i) => (
                 <span key={i} className="tag">{tag}</span>
               ))}
             </div>
-            <p className="date">{opportunity.date}</p>
+            <p className="date">{new Date(post.date).toLocaleDateString()}</p>
           </div>
         ))}
       </div>
