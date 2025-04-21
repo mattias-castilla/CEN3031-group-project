@@ -24,6 +24,8 @@ header {
 
 footer {
     margin-top: auto;
+    background-color: #0033a0;
+    color: white;
 }
 
 .logo {
