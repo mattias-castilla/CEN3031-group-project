@@ -23,8 +23,9 @@ const Login = () => {
 
             setError('');
             setIsLoggedIn(true);
-            // You might want to navigate to a dashboard or home page after successful login
-            // navigate('/dashboard');
+            setTimeout(() => {
+                navigate('/home');
+              }, 2000);
         } catch (err) {
             setError('Invalid credentials. Please try again.');
         }

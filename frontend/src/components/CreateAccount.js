@@ -27,7 +27,7 @@ const CreateAccount = () => {
         password
       });
 
-      setSuccess('Account successfully created! Redirecting to login...');
+      setSuccess('Account successfully created!');
       setError('');
       setTimeout(() => {
         navigate('/user-type');
