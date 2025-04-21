@@ -11,3 +11,31 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* ─── GLOBAL HEADER LAYOUT ─────────────────────────────────────────── */
+header {
+  position: relative;          /* for absolutely‑positioned children */
+  background-color: #0033a0;   /* consistent blue bar */
+  height: 60px;                /* uniform height on every page */
+  display: flex;
+  align-items: center;         /* vertically center contents */
+  padding: 0 1rem;             /* space at edges */
+}
+
+/* center the orange logo text */
+header .logo {
+  margin: 0 auto;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ff6600;
+  font-family: "Bruno Ace", sans-serif;
+}
+
+/* ─── HAMBURGER POSITIONING ────────────────────────────────────────── */
+.hamburger-wrapper {
+  position: absolute;          /* relative to the header */
+  top: 50%;
+  left: 1rem;                  /* stick to left padding */
+  transform: translateY(-50%); /* perfect vertical centering */
+  z-index: 1000;
+}
