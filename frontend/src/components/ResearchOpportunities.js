@@ -11,33 +11,41 @@ const ResearchOpportunities = () => {
   const [sortedByDate, setSortedByDate] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
+  const [expandedId, setExpandedId]       = useState(null);
+  const [email, setEmail]                 = useState('');
+  const [application, setApplication]     = useState('');
+  const [submitStatus, setSubmitStatus]   = useState('');
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const resp = await axios.get(
-          'http://localhost:5000/api/user/all/posts',
-          { withCredentials: true }
-        );
-        const safePosts = (resp.data.posts || []).map((post) => ({
-          ...post,
-          id: post._id || post.id,  // ensure we have an `id`
-          tags: Array.isArray(post.tags)
-            ? post.tags
-            : typeof post.tags === 'string'
-            ? post.tags.split(',').map((t) => t.trim()).filter(Boolean)
-            : [],
+    axios.get('http://localhost:5000/api/user/all/posts', { withCredentials: true })
+      .then(resp => {
+        const safe = (resp.data.posts || []).map(p => ({
+          ...p,
+          id: p._id || p.id,
+          tags: Array.isArray(p.tags)
+            ? p.tags
+            : typeof p.tags === 'string'
+              ? p.tags.split(',').map(t => t.trim()).filter(Boolean)
+              : []
         }));
-        setOpportunities(safePosts);
-      } catch (err) {
-        console.error(err);
-        setError('Could not load research opportunities.');
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchPosts();
+        setOpportunities(safe);
+      })
+      .catch(() => setError('Could not load research opportunities.'))
+      .finally(() => setLoading(false));
   }, []);
+
+
+  const filtered = opportunities
+  .filter(p =>
+    selectedTag
+      ? p.tags.map(t => t.toLowerCase()).includes(selectedTag.toLowerCase())
+      : true
+  )
+  .sort((a, b) => {
+    const da = new Date(a.date || 0);
+    const db = new Date(b.date || 0);
+    return sortedByDate ? db - da : da - db;
+  });
 
   if (loading) {
     return (
@@ -51,17 +59,26 @@ const ResearchOpportunities = () => {
     );
   }
 
-  const filtered = opportunities
-    .filter((post) =>
-      selectedTag
-        ? post.tags.map((t) => t.toLowerCase()).includes(selectedTag.toLowerCase())
-        : true
-    )
-    .sort((a, b) => {
-      const da = new Date(a.date || 0);
-      const db = new Date(b.date || 0);
-      return sortedByDate ? db - da : da - db;
-    });
+  const handleCardClick = id => {
+    setExpandedId(expandedId === id ? null : id);
+    setEmail('');
+    setApplication('');
+    setSubmitStatus('');
+  };
+
+  const handleApply = async (postId) => {
+    setSubmitStatus('Submitting…');
+    try {
+      await axios.post(
+        'http://localhost:5000/api/user/apply',
+        { postId, email, application },
+        { withCredentials: true }
+      );
+      setSubmitStatus('Application sent!');
+    } catch {
+      setSubmitStatus('Failed to send application.');
+    }
+  };
 
   return (
     <div className="research-page">
@@ -85,25 +102,51 @@ const ResearchOpportunities = () => {
       {error && <div className="error-message">{error}</div>}
 
       <div className="research-list">
-        {filtered.map((post) => (
-          <Link
-            key={post.id}
-            to={`/research/${post.id}`}
-            className="research-card"
-          >
-            <h3 className="research-title">{post.title}</h3>
-            <p className="research-desc">{post.description}</p>
-            <div className="tags">
-              {post.tags.map((tag, i) => (
-                <span key={i} className="tag">{tag}</span>
-              ))}
-            </div>
-            {post.date && (
+        {filtered.map(post => (
+          <div key={post.id} className="research-card">
+            <div
+              className="card-summary"
+              onClick={() => handleCardClick(post.id)}
+            >
+              <h3>{post.title}</h3>
+              <p>{post.description}</p>
+              <div className="tags">
+                {post.tags.map((t,i) => <span key={i} className="tag">{t}</span>)}
+              </div>
               <p className="date">
-                {new Date(post.date).toLocaleDateString()}
+                {post.date && new Date(post.date).toLocaleDateString()}
               </p>
+            </div>
+
+            {expandedId === post.id && (
+              <div className="card-expanded">
+                <h4>Details</h4>
+                <p><strong>Department:</strong> {post.department}</p>
+                <p><strong>Full Description:</strong> {post.description}</p>
+                {/* Application form */}
+                <div className="apply-form">
+                  <input
+                    type="email"
+                    placeholder="Your email"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                  />
+                  <textarea
+                    placeholder="type your application here"
+                    value={application}
+                    onChange={e => setApplication(e.target.value)}
+                  />
+                  <button
+                    onClick={() => handleApply(post.id)}
+                    disabled={!email || !application}
+                  >
+                    Submit Application
+                  </button>
+                  {submitStatus && <p className="status">{submitStatus}</p>}
+                </div>
+              </div>
             )}
-          </Link>
+          </div>
         ))}
       </div>
     </div>
