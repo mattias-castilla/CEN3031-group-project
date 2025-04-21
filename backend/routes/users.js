@@ -47,4 +47,28 @@ router.post("/new/post", authCheck, researcherCheck, (req, res) => {
 
 });
 
+
+router.post("/apply", authCheck, researcherCheck, (req, res) => {
+  const {post, email, date, application} = req.body;
+
+  try{
+
+    insert({
+      post,
+      email,
+      date,
+      application
+    }, "applications")
+      .then(() => {
+        res.status(201).json({ message: "Application created!" });
+      })
+      .catch((err) => {
+        res.status(500).json({ error: "Application failed!", details: err.message });
+      });
+  } catch (err) {
+    res.status(500).json({ error: "Server error!", details: err.message });
+  }
+
+});
+
 module.exports = router;
