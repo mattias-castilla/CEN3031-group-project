@@ -1,105 +1,113 @@
+// src/components/ResearchOpportunities.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './ResearchOpportunities.css'; 
+import { Link } from 'react-router-dom';
+import HamburgerMenu from './HamburgerMenu';
+import './ResearchOpportunities.css';
 
 const ResearchOpportunities = () => {
-    const [opportunities, setOpportunities] = useState([]);      
-    const [selectedTag, setSelectedTag] = useState('');
-    const [sortedByDate, setSortedByDate] = useState(false);
-    const [error, setError] = useState('');
-    const [loading, setLoading] = useState(true);
-  
-    useEffect(() => {
-        const fetchPosts = async () => {
-          try {
-            const resp = await axios.get(
-              'http://localhost:5000/api/user/all/posts',
-              { withCredentials: true }             
-            );
-            const safePosts = (resp.data.posts || []).map(post => ({
-                ...post,
-                tags: Array.isArray(post.tags)
-                  ? post.tags
-                  : typeof post.tags === 'string'
-                    ? post.tags.split(',').map(t => t.trim()).filter(Boolean)
-                    : []
-              }));
-              setOpportunities(safePosts);     
-          } 
-          catch (err) {
-            console.error(err);
-            setError('Could not load research opportunities.');
-          }
-          finally {
-            setLoading(false);
-          }
-        };
+  const [opportunities, setOpportunities] = useState([]);
+  const [selectedTag, setSelectedTag] = useState('');
+  const [sortedByDate, setSortedByDate] = useState(false);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
 
-        fetchPosts();
-      }, []);
-  
-      if (loading) {
-        return (
-          <div className="research-page">
-            <header>
-              <div className="logo">AcademiNet</div>
-            </header>
-            <p>Loading…</p>
-          </div>
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const resp = await axios.get(
+          'http://localhost:5000/api/user/all/posts',
+          { withCredentials: true }
         );
+        const safePosts = (resp.data.posts || []).map((post) => ({
+          ...post,
+          id: post._id || post.id,  // ensure we have an `id`
+          tags: Array.isArray(post.tags)
+            ? post.tags
+            : typeof post.tags === 'string'
+            ? post.tags.split(',').map((t) => t.trim()).filter(Boolean)
+            : [],
+        }));
+        setOpportunities(safePosts);
+      } catch (err) {
+        console.error(err);
+        setError('Could not load research opportunities.');
+      } finally {
+        setLoading(false);
       }
+    };
+    fetchPosts();
+  }, []);
 
-      const filtered = opportunities
-      .filter(post => {
-        const tags = Array.isArray(post.tags) ? post.tags : [];
-        return selectedTag ? tags.includes(selectedTag) : true;
-      })
-      .sort((a, b) => {
-        const da = new Date(a.date || 0);
-        const db = new Date(b.date || 0);
-        return sortedByDate ? db - da : da - db;
-      });
+  if (loading) {
+    return (
+      <div className="research-page">
+        <header>
+          <HamburgerMenu />
+          <div className="logo">AcademiNet</div>
+        </header>
+        <p>Loading…</p>
+      </div>
+    );
+  }
 
+  const filtered = opportunities
+    .filter((post) =>
+      selectedTag
+        ? post.tags.map((t) => t.toLowerCase()).includes(selectedTag.toLowerCase())
+        : true
+    )
+    .sort((a, b) => {
+      const da = new Date(a.date || 0);
+      const db = new Date(b.date || 0);
+      return sortedByDate ? db - da : da - db;
+    });
 
   return (
     <div className="research-page">
       <header>
+        <HamburgerMenu />
         <div className="logo">AcademiNet</div>
       </header>
-      
+
       <div className="filters">
-        <input 
-          type="text" 
-          placeholder="Filter by tags..." 
-          value={selectedTag} 
-          onChange={e => setSelectedTag(e.target.value)}
+        <input
+          type="text"
+          placeholder="Filter by tags..."
+          value={selectedTag}
+          onChange={(e) => setSelectedTag(e.target.value)}
         />
-        <button onClick={() => setSortedByDate(!sortedByDate)}>
-        Sort by Date
+        <button onClick={() => setSortedByDate((s) => !s)}>
+          {sortedByDate ? 'Oldest First' : 'Newest First'}
         </button>
       </div>
 
       {error && <div className="error-message">{error}</div>}
 
-       <div className="research-list">
-        {filtered.map((post, idx) => (
-          <div className="research-item" key={idx}>
-            <h3>{post.title}</h3>
-            <p>{post.description}</p>
+      <div className="research-list">
+        {filtered.map((post) => (
+          <Link
+            key={post.id}
+            to={`/research/${post.id}`}
+            className="research-card"
+          >
+            <h3 className="research-title">{post.title}</h3>
+            <p className="research-desc">{post.description}</p>
             <div className="tags">
-              {(Array.isArray(post.tags) ? post.tags : []).map((tag, i) => (
+              {post.tags.map((tag, i) => (
                 <span key={i} className="tag">{tag}</span>
               ))}
             </div>
-            <p className="date">
+            {post.date && (
+              <p className="date">
                 {new Date(post.date).toLocaleDateString()}
-            </p>
-          </div>
+              </p>
+            )}
+          </Link>
         ))}
       </div>
     </div>
   );
 };
-
 
 export default ResearchOpportunities;
