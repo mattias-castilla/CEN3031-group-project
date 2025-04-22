@@ -1,7 +1,7 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const { validUser, getPassword } = require("../config/db");
+const { validUser, getPassword, isStudent } = require("../config/db");
 
 const router = express.Router();
 // need an actual jwt secret setup and need to remove this temp
@@ -27,7 +27,19 @@ router.post("/login", async (req, res) => {
         });
     }
 
-    const userToken = jwt.sign({email : email }, JWT_SECRET, { expiresIn: "1h" });
+        const check_type = await isStudent(email);
+        var type_f = "";
+    if(check_type == true){
+        type_f = "Student";
+    }else{
+        type_f = "Researcher";
+    }
+
+    const userToken = jwt.sign(
+        {email : email,
+        type : type_f
+
+     }, JWT_SECRET, { expiresIn: "1h" });
 
     // the users jw token can be stored in a cookie
     // the cookie will be called token
@@ -37,7 +49,7 @@ router.post("/login", async (req, res) => {
         maxAge: 3600000 // 1 hour in milliseconds
     })
 
-    res.json({userToken, user: { email: email } });
+    res.json({userToken, user: { email: email , type : type_f} });
 });
 
 module.exports = router;

@@ -1,0 +1,88 @@
+
+.postings-page header {
+    position: relative;
+    background-color: #0033cc;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+  }
+  .postings-page .logo {
+    margin: 0 auto;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ff6600;
+    font-family: Bruno Ace, sans-serif;
+  }
+  
+  .postings-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    text-align: left;
+  }
+  
+  .postings-container h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+  }
+  
+  /* form */
+  .posting-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .posting-form input,
+  .posting-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #f1f2fb;
+  }
+  
+  .posting-form textarea {
+    resize: vertical;
+  }
+  
+  .posting-form button {
+    align-self: flex-start;
+    padding: 0.75rem 1.5rem;
+    background: #0033a0;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .posting-form button:hover {
+    background: #002580;
+  }
+  
+  .posting-form button[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+
+  .msg {
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 5px;
+    font-weight: 500;
+  }
+  .msg.error {
+    background: #ffebee;
+    color: #c62828;
+  }
+  .msg.success {
+    background: #e8f5e9;
+    color: #2e7d32;
+  }
+  

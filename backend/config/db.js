@@ -5,11 +5,10 @@ const uri = "mongodb+srv://ethanelliott50:"+db_password+"@cluster0.fh1jr.mongodb
 
 const dbName = "db"
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
-    strict: true,
+    strict: false,
     deprecationErrors: true,
   }
 });
@@ -40,7 +39,7 @@ async function insert(document, collection) {
     if (await validUser(document.email))
       throw new Error("Duplicate user.");
   }
-  else {
+  else if (collection !== "applications") {
     throw new Error("Invalid collection.")
   }
 
@@ -52,16 +51,54 @@ async function insert(document, collection) {
 }
 
 async function del(query, collection) {
-  if (!["posts", "students", "researchers"].includes(collection)) {
+  if (!["posts", "students", "researchers", "applications"].includes(collection)) {
     throw new Error("Invalid collection.");
   }
 
-  let document = db.collection(collection).find(query);
   const db = client.db(dbName);
-  await db.collection(collection).deleteOne(document, function (err, res) {
+  await db.collection(collection).deleteOne(query, function (err, res) {
     if (err) throw err;
     console.log("1 document deleted");
   });
+}
+
+async function search(query, path, project, collection) {
+  const db = client.db(dbName);
+  let result = db.collection(collection).aggregate([
+    {
+      $search: {
+        index: "default",
+        text: {
+          query: query,
+          path: path
+        }
+      }
+    },
+    {
+      $project: project
+    }
+  ]);
+  return result;
+}
+
+async function find(query, collection) {
+  if (!["posts", "students", "researchers", "applications"].includes(collection)) {
+    throw new Error("Invalid collection.");
+  }
+
+  const db = client.db(dbName);
+  const cursor = await db.collection(collection).find(query);
+  return await cursor.toArray(); // Convert cursor to array
+}
+
+async function update(query, set, collection) {
+  if (!["posts", "students", "researchers", "applications"].includes(collection)) {
+    throw new Error("Invalid collection.");
+  }
+
+  const db = client.db(dbName);
+  await db.collection(collection).updateOne(query, set, {upsert: false});
+
 }
 
 async function getPassword(email) {
@@ -73,11 +110,31 @@ async function getPassword(email) {
   return user.password;
 }
 
+async function getPostings() {
+  const db = client.db(dbName);
+
+  return await db.collection("posts").find().toArray();
+
+}
+
 // return if true or false whether email is researcher
 async function isResearcher(email) {
   const db = client.db(dbName);
 
   let user = await db.collection("researchers").findOne({email: email});
+
+  if(user != null){
+    return true;
+  }else{
+    return false;
+  }
+}
+
+// return if true or false whether email is student
+async function isStudent(email) {
+  const db = client.db(dbName);
+
+  let user = await db.collection("students").findOne({email: email});
 
   if(user != null){
     return true;
@@ -100,4 +157,4 @@ async function validUser(email) {
   
 }
 
-module.exports = { connectDB, getPassword, validUser, isResearcher, insert, del, client };
+module.exports = { connectDB, getPassword, validUser, getPostings, isStudent, isResearcher, insert, del, update, find, search, client };

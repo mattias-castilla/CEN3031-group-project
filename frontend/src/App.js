@@ -1,61 +1,28 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './components/Login';
-//import Dashboard from './components/Dashboard';  // Example child component
+import { Routes, Route } from 'react-router-dom';
 
-const App = () => {
-    return (
-        <Routes>
-           
-                <Route path="/login" element={<Login />} />
-           
-        </Routes>
-    );
-};
+import Login            from './components/Login';
+import CreateAccount    from './components/CreateAccount';
+import UserType         from './components/UserType';
+import Home             from './components/Home';
+import ResearchPostings from './components/ResearchPostings';
+import ResearchHome     from './components/ResearchHome';
+import Profile          from './components/Profile';
+import ResearchOpportunities from './components/ResearchOpportunities';
+import ResearcherProfile     from './components/ResearcherProfile'; 
 
-export default App;
-
-/**import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./login";
-
-function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/dashboard" element={<h2>Dashboard (Protected Page)</h2>} />
-      </Routes>
-    </Router>
-  );
-}
+const App = () => (
+  <Routes>
+    <Route path="/"                  element={<Login />} />
+    <Route path="/register"          element={<CreateAccount />} />
+    <Route path="/user-type"         element={<UserType />} />
+    <Route path="/home"              element={<Home />} />
+    <Route path="/research-postings" element={<ResearchPostings />} />
+    <Route path="/research-page"     element={<ResearchOpportunities />} />   {/* Use ResearchHome here */}
+    <Route path="/profile"           element={<Profile />} />
+    <Route path="/ResearchHome"      element={<ResearchHome />} />
+    <Route path="/ResearcherProfile" element={<ResearcherProfile />} />
+  </Routes>
+);
 
 export default App;
-**/
-
-/** 
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;
-**/
