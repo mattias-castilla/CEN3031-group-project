@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+// src/components/Profile.jsx
+
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';                             // ← new
+import HamburgerMenu from './HamburgerMenu';           // student menu
+import ResearcherHamburgerMenu from './ResearcherHamburgerMenu'; // researcher menu
 import './Profile.css';
 
 const Profile = () => {
   const navigate = useNavigate();
+  const [userType, setUserType] = useState(null);     // ← track role
   const user = {
     name: 'Your Name',
-    //role: 'Student',
     major: 'Computer Science',
     summary: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
       incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident.`,
@@ -19,9 +24,24 @@ const Profile = () => {
     ]
   };
 
+  // fetch role on mount
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/auth/me', { withCredentials: true })
+      .then(res => {
+        setUserType(res.data.type);  // "Student" or "Researcher"
+      })
+      .catch(() => {
+        setUserType('Student');      // fallback
+      });
+  }, []);
+
   return (
     <div className="profile-page">
       <header>
+        {userType === 'Researcher'
+          ? <ResearcherHamburgerMenu />
+          : <HamburgerMenu />
+        }
         <div className="logo">AcademiNet</div>
       </header>
 
@@ -29,15 +49,11 @@ const Profile = () => {
         <aside className="sidebar">
           <div className="profile-pic-placeholder" />
           <div className="major">{user.major}</div>
-
-          
-
-          
         </aside>
 
         <main className="profile-main">
           <h1>{user.name}</h1>
-          <h2 className="role">{user.role}</h2>
+          <h2 className="role">{userType || ''}</h2>
 
           <section className="section">
             <h3>Summary:</h3>

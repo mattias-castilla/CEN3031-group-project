@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import HamburgerMenu from './HamburgerMenu';
+import HamburgerMenu from './ResearcherHamburgerMenu';
 import './ResearchPostings.css';
 
 
