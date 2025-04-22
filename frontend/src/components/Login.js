@@ -21,11 +21,7 @@ const Login = () => {
                 withCredentials: true
             });
 
-            //setError('');
-            //setIsLoggedIn(true);
-            //setTimeout(() => {
-                //navigate('/home');
-              //}, 2000);
+            
             const { data } = await axios.get(
                 'http://localhost:5000/api/user/role',
                 { withCredentials: true }

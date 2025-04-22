@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './ResearcherHamburgerMenu.css';            // ← make sure this path is correct
+import './ResearcherHamburgerMenu.css';            
 
 export default function HamburgerMenu() {
   console.log('🍔 HamburgerMenu rendered');

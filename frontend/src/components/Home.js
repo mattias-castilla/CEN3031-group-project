@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
-import HamburgerMenu from './HamburgerMenu';  // ← added
+import HamburgerMenu from './HamburgerMenu';  
 
 const Home = () => {
   const [currentPostIndex, setCurrentPostIndex] = useState(0);
@@ -31,7 +31,7 @@ const Home = () => {
   return (
     <div className="home">
       <header>
-        <HamburgerMenu />              {/* ← added */}
+        <HamburgerMenu />              
         <div className="logo">AcademiNet</div>
       </header>
 

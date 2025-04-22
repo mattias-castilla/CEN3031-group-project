@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import HamburgerMenu from './HamburgerMenu';  // ← added
-import './Profile.css';
+import HamburgerMenu from './HamburgerMenu';  
 
 const Profile = () => {
   const navigate = useNavigate();
   const user = {
     name: 'Your Name',
-    // role: 'Student',
     major: 'Computer Science',
     summary: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
       incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident.`,
@@ -23,7 +21,7 @@ const Profile = () => {
   return (
     <div className="profile-page">
       <header>
-        <HamburgerMenu />                 {/* ← added */}
+        <HamburgerMenu />                 
         <div className="logo">AcademiNet</div>
       </header>
 

@@ -7,7 +7,6 @@ const ResearcherProfile = () => {
   const navigate = useNavigate();
   const user = {
     name: 'Your Name',
-    // role: 'Student',
     major: 'Computer Science',
     summary: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
       incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident.`,
@@ -23,7 +22,7 @@ const ResearcherProfile = () => {
   return (
     <div className="profile-page">
       <header>
-        <ResearcherHamburgerMenu />                 {/* ← added */}
+        <ResearcherHamburgerMenu />                 
         <div className="logo">AcademiNet</div>
       </header>
 

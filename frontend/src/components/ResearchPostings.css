@@ -1,4 +1,4 @@
-/* container & header */
+
 .postings-page header {
     position: relative;
     background-color: #0033cc;
@@ -70,7 +70,7 @@
     cursor: not-allowed;
   }
   
-  /* messages */
+
   .msg {
     margin-bottom: 1rem;
     padding: 0.75rem 1rem;

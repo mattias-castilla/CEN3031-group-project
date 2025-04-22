@@ -1,11 +1,11 @@
-/* src/components/ResearchOpportunities.css */
+
 
 .research-page {
   padding: 0;
   text-align: center;
 }
 
-/* HEADER */
+
 .research-page header {
   position: relative;
   background-color: #0033cc;
@@ -23,7 +23,7 @@
   font-family: Bruno Ace, sans-serif;
 }
 
-/* FILTERS */
+
 .filters {
   margin: 1rem auto;
   max-width: 800px;
@@ -48,13 +48,13 @@
   background: #002580;
 }
 
-/* ERROR */
+
 .error-message {
   color: #c62828;
   margin-bottom: 1rem;
 }
 
-/* LIST & CARDS */
+
 .research-list {
   max-width: 800px;
   margin: 0 auto 2rem;
@@ -80,7 +80,7 @@
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
 }
 
-/* TITLE & DESCRIPTION */
+
 .research-title {
   margin: 0 0 0.5rem;
   font-size: 1.4rem;
@@ -91,13 +91,13 @@
   font-size: 1rem;
   line-height: 1.4;
   display: -webkit-box;
-  -webkit-line-clamp: 2;        /* show 2 lines */
+  -webkit-line-clamp: 2;        
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* TAGS & DATE */
+
 .tags {
   margin-bottom: 0.75rem;
 }

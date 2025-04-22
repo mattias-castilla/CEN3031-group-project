@@ -1,17 +1,11 @@
-/* src/components/HamburgerMenu.css
-   Always fix the burger in the top‑left corner of the viewport,
-   appearing over the blue header bar. */
-
-/* —— Wrapper: fixed to viewport top‑left —— */
 .hamburger-wrapper {
-  position: fixed;      /* stick to the viewport */
-  top: 2rem;               /* align with top edge */
-  left: 0;              /* align with left edge */
-  padding: 0.75rem;     /* push it inward so it sits over the blue bar */
-  z-index: 1000;        /* above everything else */
+  position: fixed;      
+  top: 2rem;               
+  left: 0;             
+  padding: 0.75rem;     
+  z-index: 1000;        
 }
 
-/* —— Button with three stacked lines —— */
 .hamburger-btn {
   width: 30px;
   height: 24px;
@@ -28,20 +22,20 @@
   display: block;
   height: 4px;
   border-radius: 2px;
-  background-color: white; /* white lines contrast on the blue bar */
+  background-color: white; 
 }
 
-/* —— Slide‑out panel —— */
+
 .hamburger-nav {
-  position: fixed;      /* also fixed so it stays in view */
-  top: 3.0rem;          /* just below the header bar */
+  position: fixed;      
+  top: 3.0rem;          
   left: 0;
   width: 200px;
   background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
-  z-index: 999;         /* just below the button */
+  z-index: 999;         
 }
 
 .hamburger-nav a {

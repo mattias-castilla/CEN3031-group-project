@@ -1,4 +1,3 @@
-/* header */
 .active-page header {
   position: relative;
   background-color: #0033cc;
@@ -16,7 +15,6 @@
   font-family: Bruno Ace, sans-serif;
 }
 
-/* title & list */
 .active-list {
   max-width: 800px;
   margin: 2rem auto;
@@ -32,7 +30,6 @@
   font-weight: 500;
 }
 
-/* cards */
 .active-card {
   display: block;
   background: #f9f9f9;
@@ -48,7 +45,6 @@
   box-shadow: 0 6px 12px rgba(0,0,0,0.15);
 }
 
-/* card header */
 .card-header {
   display: flex;
   justify-content: space-between;
@@ -65,14 +61,12 @@
   color: #555;
 }
 
-/* lab & supervisor */
 .card-lab {
   font-size: 0.9rem;
   color: #333;
   margin: 0.25rem 0 0.75rem;
 }
 
-/* truncated description */
 .card-desc {
   margin: 0;
   font-size: 1rem;
@@ -84,7 +78,6 @@
   text-overflow: ellipsis;
 }
 
-/* tags */
 .card-tags {
   margin-top: 0.75rem;
 }
