@@ -15,6 +15,7 @@ export default function ResearchPostings() {
     description: '',
   });
   const [posts, setPosts]     = useState([]);
+  const [applicationsByPostId, setApplicationsByPostId] = useState({});
   const [loading, setLoading] = useState(false);
   const [error,   setError]   = useState('');
   const [success, setSuccess] = useState('');
@@ -35,9 +36,26 @@ export default function ResearchPostings() {
           axios.get('http://localhost:5000/api/user/all/posts', { withCredentials: true }),
           fetchEmail()
         ]);
+
         setPosts(
           (allPosts.data.posts || []).filter(p => p.email === myEmail)
         );
+
+        const map = {};
+      await Promise.all(
+         myPosts.map(async post => {
+           const appsResp = await axios.get(
+             'http://localhost:5000/api/user/get/applications',
+             {
+               withCredentials: true,
+              data: { post: post._id }
+             }
+           );
+           map[post._id] = appsResp.data.applications;
+         })
+       );
+       setApplicationsByPostId(map);
+
       } catch (err) {
         console.error(err);
         setError('Could not load your posts');
@@ -156,6 +174,20 @@ export default function ResearchPostings() {
                 <h4>{p.title}</h4>
                 <small>{new Date(p.date).toLocaleDateString()}</small>
                 <p>{p.description}</p>
+                <div className="applications">
+                <h5>Applications:</h5>
+               {(applicationsByPostId[p._id] || []).length === 0 ? (
+                 <p>No applications yet.</p>
+              ) : (
+                applicationsByPostId[p._id].map((app, idx) => (
+                  <div key={idx} className="application">
+                    <strong>{app.email}</strong> on{' '}
+                     {new Date(app.date).toLocaleString()}
+                    <p>{app.application}</p>
+                   </div>
+                ))
+              )}
+            </div>
               </div>
             ))
           )}
