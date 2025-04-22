@@ -87,10 +87,8 @@ async function find(query, collection) {
   }
 
   const db = client.db(dbName);
-  await db.collection(collection).find(query, function (err, res) {
-    if (err) throw err;
-    console.log("Documents found");
-  });
+  const cursor = await db.collection(collection).find(query);
+  return await cursor.toArray(); // Convert cursor to array
 }
 
 async function update(query, set, collection) {
