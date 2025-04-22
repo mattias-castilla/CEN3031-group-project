@@ -9,7 +9,7 @@ import ResearchPostings from './components/ResearchPostings';
 import ResearchHome     from './components/ResearchHome';
 import Profile          from './components/Profile';
 import ResearchOpportunities from './components/ResearchOpportunities';
-import ResearcherProfile     from './components/researcherProfile'; 
+import ResearcherProfile     from './components/ResearcherProfile'; 
 
 const App = () => (
   <Routes>
@@ -21,7 +21,7 @@ const App = () => (
     <Route path="/research-page"     element={<ResearchOpportunities />} />   {/* Use ResearchHome here */}
     <Route path="/profile"           element={<Profile />} />
     <Route path="/ResearchHome"      element={<ResearchHome />} />
-    <Route path="/researcherProfile" element={<ResearcherProfile />} />
+    <Route path="/ResearcherProfile" element={<ResearcherProfile />} />
   </Routes>
 );
 

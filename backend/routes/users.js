@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/get/applications", authCheck, async (req, res) => {
-  const { post } = req.body;
+  const { post } = req.query;
 
   const applications = await find({post : post }, "applications");
 
