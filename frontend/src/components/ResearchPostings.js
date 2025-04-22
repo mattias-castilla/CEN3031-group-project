@@ -45,13 +45,12 @@ export default function ResearchPostings() {
         const map = {};
         await Promise.all(
          myPosts.map(async post => {
-           const appsResp = await axios.get(
-             'http://localhost:5000/api/user/get/applications',
-             {
-               withCredentials: true,
-              data: { post: post._id }
-             }
-           );
+           const appsResp = await axios({
+            method: 'get',
+            url:    'http://localhost:5000/api/user/get/applications',
+            data:   { post: post._id },      
+            withCredentials: true
+          });
            map[post._id] = appsResp.data.applications;
          })
        );
