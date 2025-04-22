@@ -4,6 +4,8 @@ const { insert, getPostings } = require('../config/db');
 const researcherCheck = require('../middleware/researcherCheck');
 const studentCheck = require('../middleware/studentCheck');
 var router = express.Router();
+const jwt = require("jsonwebtoken");
+const JWT_SECRET = process.env.JWT_SECRET || "temp_secret";
 
 router.get("/", (req, res) => {
   res.json({ message: "test user api" });
@@ -20,6 +22,23 @@ router.get("/all/posts", authCheck, async (req, res) => {
     });
   }
   
+});
+
+router.get("/get/email", authCheck, async (req, res) =>{
+  const token = req.cookies.token;
+
+  try{
+    const decodedToken = jwt.verify(token, JWT_SECRET);
+    req.user = decodedToken;
+    res.status(201).json({
+      email : decodedToken.email
+    });
+
+  }catch(err){
+    res.status(500).json({
+      error: "Server error!"
+    });
+  }
 });
 
 // post the researchers new research posting
