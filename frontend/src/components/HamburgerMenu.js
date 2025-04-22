@@ -23,8 +23,6 @@ export default function HamburgerMenu() {
           <Link to="/home"            onClick={() => setOpen(false)}>Home</Link>
           <Link to="/research-page"  onClick={() => setOpen(false)}>Research</Link>
           <Link to="/profile"        onClick={() => setOpen(false)}>Profile</Link>
-          <Link to="/register"       onClick={() => setOpen(false)}>Sign Up</Link>
-          <Link to="/"               onClick={() => setOpen(false)}>Log In</Link>
         </nav>
       )}
     </div>
