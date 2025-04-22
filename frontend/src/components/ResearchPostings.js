@@ -37,7 +37,7 @@ export default function ResearchPostings() {
           fetchEmail()
         ]);
 
-        const myPosts = (allPostsResp.data.posts || [])
+        const myPosts = (allPosts.data.posts || [])
           .filter(p => p.email === myEmail);
 
         setPosts(myPosts);
