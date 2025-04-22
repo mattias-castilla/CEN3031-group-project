@@ -51,7 +51,7 @@ async function insert(document, collection) {
 }
 
 async function del(query, collection) {
-  if (!["posts", "students", "researchers"].includes(collection)) {
+  if (!["posts", "students", "researchers", "applications"].includes(collection)) {
     throw new Error("Invalid collection.");
   }
 
@@ -81,8 +81,20 @@ async function search(query, path, project, collection) {
   return result;
 }
 
+async function find(query, collection) {
+  if (!["posts", "students", "researchers", "applications"].includes(collection)) {
+    throw new Error("Invalid collection.");
+  }
+
+  const db = client.db(dbName);
+  await db.collection(collection).find(query, function (err, res) {
+    if (err) throw err;
+    console.log("Documents found");
+  });
+}
+
 async function update(query, set, collection) {
-  if (!["posts", "students", "researchers"].includes(collection)) {
+  if (!["posts", "students", "researchers", "applications"].includes(collection)) {
     throw new Error("Invalid collection.");
   }
 
@@ -147,4 +159,4 @@ async function validUser(email) {
   
 }
 
-module.exports = { connectDB, getPassword, validUser, getPostings, isStudent, isResearcher, insert, del, update, search, client };
+module.exports = { connectDB, getPassword, validUser, getPostings, isStudent, isResearcher, insert, del, update, find, search, client };
