@@ -1,6 +1,6 @@
 var express = require('express');
 const authCheck = require('../middleware/authCheck');
-const { insert, getPostings } = require('../config/db');
+const { insert, getPostings, find } = require('../config/db');
 const researcherCheck = require('../middleware/researcherCheck');
 const studentCheck = require('../middleware/studentCheck');
 var router = express.Router();
@@ -11,13 +11,27 @@ router.get("/", (req, res) => {
   res.json({ message: "test user api" });
 });
 
+router.get("/get/applications", authCheck, async (req, res) => {
+  const { post } = req.body;
+
+  const applications = await find({post : post }, "applications");
+
+  try{
+    res.status(201).json({ applications });
+  }catch(err){
+    res.status(500).json({
+      error: "Server error!"
+    });
+  }
+});
+
 router.get("/all/posts", authCheck, async (req, res) => {
   const posts = await getPostings();
 
   try {
     res.json({ posts });
   }catch(err){
-    res.statusCode(500).json({
+    res.status(500).json({
       message: "Server error!"
     });
   }
