@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import HamburgerMenu from './HamburgerMenu';  // ← added
 import './Profile.css';
 
 const Profile = () => {
@@ -22,6 +23,7 @@ const Profile = () => {
   return (
     <div className="profile-page">
       <header>
+        <HamburgerMenu />                 {/* ← added */}
         <div className="logo">AcademiNet</div>
       </header>
 
