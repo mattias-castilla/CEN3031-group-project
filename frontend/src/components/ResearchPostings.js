@@ -37,12 +37,13 @@ export default function ResearchPostings() {
           fetchEmail()
         ]);
 
-        setPosts(
-          (allPosts.data.posts || []).filter(p => p.email === myEmail)
-        );
+        const myPosts = (allPostsResp.data.posts || [])
+          .filter(p => p.email === myEmail);
+
+        setPosts(myPosts);
 
         const map = {};
-      await Promise.all(
+        await Promise.all(
          myPosts.map(async post => {
            const appsResp = await axios.get(
              'http://localhost:5000/api/user/get/applications',
