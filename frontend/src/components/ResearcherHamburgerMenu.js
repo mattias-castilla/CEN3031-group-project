@@ -21,7 +21,7 @@ export default function HamburgerMenu() {
       {open && (
         <nav className="hamburger-nav">
           <Link to="/Researchhome"            onClick={() => setOpen(false)}>Home</Link>
-          <Link to="/profile"       onClick={() => setOpen(false)}>Profile</Link>
+          <Link to="/Researcherprofile"       onClick={() => setOpen(false)}>Profile</Link>
         </nav>
       )}
     </div>
